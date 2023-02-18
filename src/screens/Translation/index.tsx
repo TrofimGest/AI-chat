@@ -8,12 +8,14 @@ export const Translation: React.FC = () => {
   const [language, setLanguage] = useState<string>('English');
   const [translatedText, setTranslatedText] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+
   const translateText = useCallback(async () => {
     setLoading(true);
     const result = await getTranslatedText(text, language);
     setTranslatedText(result);
     setLoading(false);
   }, [text, language]);
+
   return (
     <View style={styles.container}>
       <TextInput

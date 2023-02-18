@@ -7,7 +7,7 @@ export const getAnswer = async (question: string) => {
     return res?.data?.result;
   } catch (e) {
     console.error(e);
-    return 'Something went wrong!! ☹️';
+    return 'Something went wrong☹️';
   }
 };
 
@@ -17,6 +17,6 @@ export const getTranslatedText = async (query: string, language: string) => {
     return res?.data?.result;
   } catch (e) {
     console.error(e);
-    return 'Something went wrong!! ☹️';
+    return 'Something went wrong☹️';
   }
 };

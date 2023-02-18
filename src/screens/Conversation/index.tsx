@@ -18,8 +18,15 @@ export const Conversation: React.FC = () => {
   const [conversation, setConversation] = useState<Record<string, string>>({});
   const scrollRef = useRef<ScrollView>(null);
 
+  const animateScroll = () => {
+    setTimeout(() => scrollRef?.current?.scrollToEnd({animated: true}), 100);
+  };
+
   const handleSubmit = useCallback(async () => {
-    setTimeout(() => scrollRef?.current?.scrollToEnd({animated: true}), 200);
+    if (!text) {
+      return;
+    }
+    animateScroll();
     setConversation(prev => ({
       ...prev,
       ...{[`sent${Object.keys(prev)?.length}`]: text},
@@ -28,12 +35,11 @@ export const Conversation: React.FC = () => {
     setLoading(true);
     const answer = await getAnswer(text);
     setLoading(false);
-    console.log('answer:', answer);
     setConversation(prev => ({
       ...prev,
       ...{[`received${Object.keys(prev)?.length}`]: answer},
     }));
-    setTimeout(() => scrollRef?.current?.scrollToEnd({animated: true}), 200);
+    animateScroll();
   }, [text]);
 
   return (
@@ -82,20 +88,22 @@ export const Conversation: React.FC = () => {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <TextInput
-          blurOnSubmit
-          autoCapitalize="none"
-          autoComplete="off"
-          autoCorrect={false}
-          keyboardAppearance={'dark'}
-          keyboardType={'web-search'}
-          style={styles.input}
-          placeholder="Ask me anything...."
-          value={text}
-          onChangeText={setText}
-          onSubmitEditing={handleSubmit}
-          placeholderTextColor={'#1116'}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            blurOnSubmit
+            autoCapitalize="none"
+            autoComplete="off"
+            autoCorrect={false}
+            keyboardAppearance={'dark'}
+            keyboardType={'web-search'}
+            style={styles.input}
+            placeholder="Ask me anything...."
+            value={text}
+            onChangeText={setText}
+            onSubmitEditing={handleSubmit}
+            placeholderTextColor={'#1116'}
+          />
+        </View>
       </KeyboardAvoidingView>
     </>
   );
