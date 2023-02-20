@@ -25,7 +25,7 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 14,
     fontWeight: '700',
-    color: '#000',
+    color: 'black',
   },
   loader: {
     position: 'absolute',
