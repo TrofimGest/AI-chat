@@ -34,11 +34,11 @@ export const Conversation: React.FC = () => {
     setText('');
     setLoading(true);
     const answer = await getAnswer(text);
-    setLoading(false);
     setConversation(prev => ({
       ...prev,
       ...{[`received${Object.keys(prev)?.length}`]: answer},
     }));
+    setLoading(false);
     animateScroll();
   }, [text]);
 
