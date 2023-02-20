@@ -1,6 +1,5 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {
-  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -8,7 +7,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import {Typing} from '../../../assets';
+import {TypingAnimation} from 'react-native-typing-animation';
 import {getAnswer} from '../../services/api';
 import styles from './styles';
 
@@ -77,10 +76,15 @@ export const Conversation: React.FC = () => {
           <View
             key={'typingLoader'}
             style={[styles.received, styles.chatBubble]}>
-            <Image
-              resizeMode="contain"
-              source={Typing}
+            <TypingAnimation
               style={styles.typingLoader}
+              dotColor="white"
+              dotMargin={10}
+              dotAmplitude={3}
+              dotSpeed={0.15}
+              dotRadius={6}
+              dotX={12}
+              dotY={6}
             />
           </View>
         )}

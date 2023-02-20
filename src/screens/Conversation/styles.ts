@@ -63,7 +63,9 @@ export default StyleSheet.create({
     letterSpacing: 0.2,
   },
   typingLoader: {
-    width: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 36,
     height: 20,
   },
 });
